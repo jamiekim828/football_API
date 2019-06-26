@@ -12,4 +12,4 @@ router.get('/team', function (req, res, next) {
     .catch(error => next(error))
 })
 
-module.export = Router
+module.exports = router
