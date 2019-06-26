@@ -4,11 +4,10 @@ const router = new Router()
 
 router.get('/team', function (req, res, next) {
     Team
-        .findAll(team)
+        .findAll()
         .then(teams => {
             res.send(teams)
-        }
-        )
+        })
         .catch(err => next(err))
 })
 
