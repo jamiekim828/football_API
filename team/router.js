@@ -1,12 +1,12 @@
-const Router = require('express')
+const { Router } = require('express')
 const Team = require('./model')
-const express = require('express')
-const app = express()
+const router = new Router()
 
-app.get('/team', function (req, res, next) {
-    Team.findAll()
+router.get('/team', function (req, res, next) {
+    Team
+    .findAll()
     .then(teams => {
-        res.json({ teams: teams })
+        res.send(teams)
     }
     )
     .catch(error => next(error))
