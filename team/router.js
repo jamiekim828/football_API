@@ -3,8 +3,8 @@ const Team = require('./model')
 const router = new Router()
 
 router.get('/team', (req, res, next) => {
-    const limit = req.query.limit || 6
-    const offset = req.query.offset || 3
+    const limit = req.query.limit || 10
+    const offset = req.query.offset || 0
     Team
         .count()
         .then(total =>
