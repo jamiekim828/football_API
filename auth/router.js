@@ -4,19 +4,13 @@ const auth = require('./middleware')
 const router = new Router()
 
 // define endpoints here
-router.post('/logins', function (req, res) {
-    const { email, password } = req.body
-    if (email && password) {
-        user.findOne({
-            email: email
+router.post('/logins', (req, res) => {
+    const email = req.body.email
+    const password = req.body.password
+    if (!email || !password) {
+        res.status(400).send({
+            message: 'Please supply a valid email and password'
         })
-            .then(entity => {
-                if (!email || !password) {
-                    res.status(400).send({
-                        message: 'Please supply verify email or password'
-                    })
-                }
-            })
     } else {
         user
             .findOne({
