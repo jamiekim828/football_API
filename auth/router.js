@@ -6,10 +6,17 @@ const router = new Router()
 // define endpoints here
 router.post('/logins', function (req, res) {
     const { email, password } = req.body
-    if (!email || !password) {
-        res.status(400).send({
-            message: 'Please supply a valid email and password'
+    if (email && password) {
+        user.findOne({
+            email: email
         })
+            .then(entity => {
+                if (!email || !password) {
+                    res.status(400).send({
+                        message: 'Please supply verify email or password'
+                    })
+                }
+            })
     } else {
         user
             .findOne({
