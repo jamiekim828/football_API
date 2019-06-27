@@ -2,13 +2,17 @@ const { Router } = require('express')
 const Team = require('./model')
 const router = new Router()
 
-router.get('/team', function (req, res, next) {
+router.get('/team', (req, res, next) => {
+    const limit = req.query.limit || 6
+    const offset = req.query.offset || 3
     Team
-        .findAll()
-        .then(teams => {
-            res.send(teams)
-        })
-        .catch(err => next(err))
+        .count()
+        .then(total =>
+            Team
+                .findAll({ limit, offset })
+                .then(team => res.send({ team, total }))
+        )
+        .catch(error => next(error))
 })
 
 router.get('/team/:id', function (req, res, next) {

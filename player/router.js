@@ -1,5 +1,6 @@
 const { Router } = require('express')
 const Player = require('./model')
+const Team = require('../team/model')
 const router = new Router()
 
 router.get('/player', function (req, res, next) {
@@ -14,7 +15,7 @@ router.get('/player', function (req, res, next) {
 router.get('/player/:id', function (req, res, next) {
     const id = req.params.id
     Player
-        .findByPk(id)
+        .findByPk(req.params.id, { include: [Team] })
         .then(player => res.send(player))
         .catch(err => next(err))
 })
